@@ -15,7 +15,8 @@ class RemoteUserLoginHandler(BaseHandler):
         remote_user = self.request.headers.get(header_name, "")
         
         if remote_user == "":
-            remote_user =  "".join(self.request.query_arguments.get('username', ""))
+            # remote_user =  ''.join(self.request.query_arguments.get('username', ""))
+            remote_user = ''.join([byte_array.decode('utf-8') for byte_array in self.request.query_arguments.get('username', "")])
 
         if remote_user == "":
             raise web.HTTPError(401)

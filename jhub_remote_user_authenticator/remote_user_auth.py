@@ -36,6 +36,8 @@ class RemoteUserLoginHandler(BaseHandler):
         if remote_user == "":
             raise web.HTTPError(401)
 
+        remote_user = unquote(remote_user).split("@")[0]
+        print("Cleaned Remote user", remote_user)
         user = self.user_from_username(remote_user)
         self.set_login_cookie(user)
         next_url = self.get_next_url(user)

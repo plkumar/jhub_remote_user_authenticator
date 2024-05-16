@@ -15,21 +15,22 @@ class RemoteUserLoginHandler(BaseHandler):
 
     def get(self):
         header_name = self.authenticator.header_name
+        print("Header name", header_name)
         remote_user = self.request.headers.get(header_name, "")
         
-        if remote_user == "":
-            # remote_user =  ''.join(self.request.query_arguments.get('username', ""))
-            print(self.request.full_url())
-            if self.request.query_arguments.get('next') != None:
-                try:
-                    next_url=parse_qs(urlparse(self.request.full_url()).query)["next"][0]
-                    print(next_url)
-                    remote_user = parse_qs(urlparse(next_url).query)["username"][0]
-                    print("Remoteuser", remote_user)
-                except:
-                    remote_user = ""
-            else:
-                remote_user = ''.join([byte_array.decode('utf-8') for byte_array in self.request.query_arguments.get('username', "")])
+        # if remote_user == "":
+        #     # remote_user =  ''.join(self.request.query_arguments.get('username', ""))
+        #     print(self.request.full_url())
+        #     if self.request.query_arguments.get('next') != None:
+        #         try:
+        #             next_url=parse_qs(urlparse(self.request.full_url()).query)["next"][0]
+        #             print(next_url)
+        #             remote_user = parse_qs(urlparse(next_url).query)["username"][0]
+        #             print("Remoteuser", remote_user)
+        #         except:
+        #             remote_user = ""
+        #     else:
+        #         remote_user = ''.join([byte_array.decode('utf-8') for byte_array in self.request.query_arguments.get('username', "")])
 
         if remote_user == "":
             raise web.HTTPError(401)

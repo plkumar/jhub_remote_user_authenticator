@@ -16,6 +16,7 @@ class RemoteUserLoginHandler(BaseHandler):
     def get(self):
         header_name = self.authenticator.header_name
         print("Header name", header_name)
+        print("Request headers", self.request.headers)
         remote_user = self.request.headers.get(header_name, "")
         print("Remote user", remote_user)
         

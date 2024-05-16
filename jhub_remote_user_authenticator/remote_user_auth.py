@@ -17,6 +17,7 @@ class RemoteUserLoginHandler(BaseHandler):
         header_name = self.authenticator.header_name
         print("Header name", header_name)
         remote_user = self.request.headers.get(header_name, "")
+        print("Remote user", remote_user)
         
         # if remote_user == "":
         #     # remote_user =  ''.join(self.request.query_arguments.get('username', ""))
